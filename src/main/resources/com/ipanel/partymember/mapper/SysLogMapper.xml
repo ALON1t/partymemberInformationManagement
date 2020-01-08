@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipanel.partymember.mapper.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.ipanel.partymember.pojo.SysLog">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="request_ip" jdbcType="VARCHAR" property="requestIp" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="action_method" jdbcType="VARCHAR" property="actionMethod" />
+    <result column="action_url" jdbcType="VARCHAR" property="actionUrl" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="ua" jdbcType="VARCHAR" property="ua" />
+    <result column="class_path" jdbcType="VARCHAR" property="classPath" />
+    <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="consuming_time" jdbcType="BIGINT" property="consumingTime" />
+    <result column="ex_desc" jdbcType="VARCHAR" property="exDesc" />
+    <result column="ex_detail" jdbcType="LONGVARCHAR" property="exDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    id, request_ip, `type`, user_name, description, action_method, action_url, params, 
+    ua, class_path, request_method, start_time, finish_time, consuming_time, ex_desc, 
+    ex_detail
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    update sys_log
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="request_ip = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.requestIp,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`type` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.type,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="user_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.userName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.description,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="action_method = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.actionMethod,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="action_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.actionUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="params = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.params,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="ua = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.ua,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="class_path = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.classPath,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="request_method = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.requestMethod,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="start_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.startTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="finish_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.finishTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="consuming_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.consumingTime,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="ex_desc = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.exDesc,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="ex_detail = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.exDetail,jdbcType=LONGVARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_log
+    (request_ip, `type`, user_name, description, action_method, action_url, params, ua, 
+      class_path, request_method, start_time, finish_time, consuming_time, ex_desc, ex_detail
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.requestIp,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER}, #{item.userName,jdbcType=VARCHAR}, 
+        #{item.description,jdbcType=VARCHAR}, #{item.actionMethod,jdbcType=VARCHAR}, #{item.actionUrl,jdbcType=VARCHAR}, 
+        #{item.params,jdbcType=VARCHAR}, #{item.ua,jdbcType=VARCHAR}, #{item.classPath,jdbcType=VARCHAR}, 
+        #{item.requestMethod,jdbcType=VARCHAR}, #{item.startTime,jdbcType=TIMESTAMP}, #{item.finishTime,jdbcType=TIMESTAMP}, 
+        #{item.consumingTime,jdbcType=BIGINT}, #{item.exDesc,jdbcType=VARCHAR}, #{item.exDetail,jdbcType=LONGVARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.ipanel.partymember.pojo.SysLog" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      request_ip,
+      `type`,
+      user_name,
+      description,
+      action_method,
+      action_url,
+      params,
+      ua,
+      class_path,
+      request_method,
+      start_time,
+      finish_time,
+      consuming_time,
+      ex_desc,
+      ex_detail,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{requestIp,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER},
+      #{userName,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR},
+      #{actionMethod,jdbcType=VARCHAR},
+      #{actionUrl,jdbcType=VARCHAR},
+      #{params,jdbcType=VARCHAR},
+      #{ua,jdbcType=VARCHAR},
+      #{classPath,jdbcType=VARCHAR},
+      #{requestMethod,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP},
+      #{finishTime,jdbcType=TIMESTAMP},
+      #{consumingTime,jdbcType=BIGINT},
+      #{exDesc,jdbcType=VARCHAR},
+      #{exDetail,jdbcType=LONGVARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      request_ip = #{requestIp,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      action_method = #{actionMethod,jdbcType=VARCHAR},
+      action_url = #{actionUrl,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      ua = #{ua,jdbcType=VARCHAR},
+      class_path = #{classPath,jdbcType=VARCHAR},
+      request_method = #{requestMethod,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      consuming_time = #{consumingTime,jdbcType=BIGINT},
+      ex_desc = #{exDesc,jdbcType=VARCHAR},
+      ex_detail = #{exDetail,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.ipanel.partymember.pojo.SysLog" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="requestIp != null">
+        request_ip,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="actionMethod != null">
+        action_method,
+      </if>
+      <if test="actionUrl != null">
+        action_url,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="ua != null">
+        ua,
+      </if>
+      <if test="classPath != null">
+        class_path,
+      </if>
+      <if test="requestMethod != null">
+        request_method,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="consumingTime != null">
+        consuming_time,
+      </if>
+      <if test="exDesc != null">
+        ex_desc,
+      </if>
+      <if test="exDetail != null">
+        ex_detail,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="requestIp != null">
+        #{requestIp,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="actionMethod != null">
+        #{actionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUrl != null">
+        #{actionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="ua != null">
+        #{ua,jdbcType=VARCHAR},
+      </if>
+      <if test="classPath != null">
+        #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumingTime != null">
+        #{consumingTime,jdbcType=BIGINT},
+      </if>
+      <if test="exDesc != null">
+        #{exDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="exDetail != null">
+        #{exDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="requestIp != null">
+        request_ip = #{requestIp,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="actionMethod != null">
+        action_method = #{actionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="actionUrl != null">
+        action_url = #{actionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="ua != null">
+        ua = #{ua,jdbcType=VARCHAR},
+      </if>
+      <if test="classPath != null">
+        class_path = #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumingTime != null">
+        consuming_time = #{consumingTime,jdbcType=BIGINT},
+      </if>
+      <if test="exDesc != null">
+        ex_desc = #{exDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="exDetail != null">
+        ex_detail = #{exDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

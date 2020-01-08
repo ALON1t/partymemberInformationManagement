@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipanel.partymember.mapper.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.ipanel.partymember.pojo.SysRole">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="ds_type" jdbcType="INTEGER" property="dsType" />
+    <result column="ds_scope" jdbcType="VARCHAR" property="dsScope" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    role_id, role_name, role_code, role_desc, create_time, update_time, del_flag, ds_type, 
+    ds_scope
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    update sys_role
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.roleName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="role_code = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.roleCode,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="role_desc = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.roleDesc,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="del_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.delFlag,jdbcType=CHAR}
+        </foreach>
+      </trim>
+      <trim prefix="ds_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.dsType,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="ds_scope = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when role_id = #{item.roleId,jdbcType=INTEGER} then #{item.dsScope,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where role_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.roleId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="role_id" keyProperty="roleId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_role
+    (role_name, role_code, role_desc, create_time, update_time, del_flag, ds_type, ds_scope
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.roleName,jdbcType=VARCHAR}, #{item.roleCode,jdbcType=VARCHAR}, #{item.roleDesc,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.delFlag,jdbcType=CHAR}, 
+        #{item.dsType,jdbcType=INTEGER}, #{item.dsScope,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="role_id" keyProperty="roleId" parameterType="com.ipanel.partymember.pojo.SysRole" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      role_name,
+      role_code,
+      role_desc,
+      create_time,
+      update_time,
+      del_flag,
+      ds_type,
+      ds_scope,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      #{roleName,jdbcType=VARCHAR},
+      #{roleCode,jdbcType=VARCHAR},
+      #{roleDesc,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{delFlag,jdbcType=CHAR},
+      #{dsType,jdbcType=INTEGER},
+      #{dsScope,jdbcType=VARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      ds_type = #{dsType,jdbcType=INTEGER},
+      ds_scope = #{dsScope,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="role_id" keyProperty="roleId" parameterType="com.ipanel.partymember.pojo.SysRole" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="roleDesc != null">
+        role_desc,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="dsType != null">
+        ds_type,
+      </if>
+      <if test="dsScope != null">
+        ds_scope,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="dsType != null">
+        #{dsType,jdbcType=INTEGER},
+      </if>
+      <if test="dsScope != null">
+        #{dsScope,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="dsType != null">
+        ds_type = #{dsType,jdbcType=INTEGER},
+      </if>
+      <if test="dsScope != null">
+        ds_scope = #{dsScope,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipanel.partymember.mapper.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.ipanel.partymember.pojo.SysMenu">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="is_frame" jdbcType="BOOLEAN" property="isFrame" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    menu_id, `name`, perms, `path`, component, parent_id, icon, sort, `type`, create_time, 
+    update_time, del_flag, is_frame
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    update sys_menu
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="perms = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.perms,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`path` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.path,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="component = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.component,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.parentId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="icon = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.icon,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="sort = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.sort,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="`type` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.type,jdbcType=CHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="del_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.delFlag,jdbcType=CHAR}
+        </foreach>
+      </trim>
+      <trim prefix="is_frame = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.isFrame,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+    </trim>
+    where menu_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.menuId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="menu_id" keyProperty="menuId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_menu
+    (`name`, perms, `path`, component, parent_id, icon, sort, `type`, create_time, update_time, 
+      del_flag, is_frame)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.perms,jdbcType=VARCHAR}, #{item.path,jdbcType=VARCHAR}, 
+        #{item.component,jdbcType=VARCHAR}, #{item.parentId,jdbcType=INTEGER}, #{item.icon,jdbcType=VARCHAR}, 
+        #{item.sort,jdbcType=INTEGER}, #{item.type,jdbcType=CHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.delFlag,jdbcType=CHAR}, #{item.isFrame,jdbcType=BOOLEAN}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="menu_id" keyProperty="menuId" parameterType="com.ipanel.partymember.pojo.SysMenu" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      `name`,
+      perms,
+      `path`,
+      component,
+      parent_id,
+      icon,
+      sort,
+      `type`,
+      create_time,
+      update_time,
+      del_flag,
+      is_frame,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{perms,jdbcType=VARCHAR},
+      #{path,jdbcType=VARCHAR},
+      #{component,jdbcType=VARCHAR},
+      #{parentId,jdbcType=INTEGER},
+      #{icon,jdbcType=VARCHAR},
+      #{sort,jdbcType=INTEGER},
+      #{type,jdbcType=CHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{delFlag,jdbcType=CHAR},
+      #{isFrame,jdbcType=BOOLEAN},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      `name` = #{name,jdbcType=VARCHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      is_frame = #{isFrame,jdbcType=BOOLEAN},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="menu_id" keyProperty="menuId" parameterType="com.ipanel.partymember.pojo.SysMenu" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="perms != null">
+        perms,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="isFrame != null">
+        is_frame,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="isFrame != null">
+        #{isFrame,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        perms = #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="isFrame != null">
+        is_frame = #{isFrame,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+</mapper>

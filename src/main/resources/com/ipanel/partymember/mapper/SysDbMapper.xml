@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipanel.partymember.mapper.SysDbMapper">
+  <resultMap id="BaseResultMap" type="com.ipanel.partymember.pojo.SysDb">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="db_type" jdbcType="VARCHAR" property="dbType" />
+    <result column="host" jdbcType="INTEGER" property="host" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    id, db_type, `host`, port, db_name, username, `password`, create_time, update_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    update sys_db
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="db_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.dbType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`host` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.host,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="port = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.port,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="db_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.dbName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="username = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.username,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`password` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.password,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_db
+    (db_type, `host`, port, db_name, username, `password`, create_time, update_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.dbType,jdbcType=VARCHAR}, #{item.host,jdbcType=INTEGER}, #{item.port,jdbcType=VARCHAR}, 
+        #{item.dbName,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.ipanel.partymember.pojo.SysDb" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_db
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      db_type,
+      `host`,
+      port,
+      db_name,
+      username,
+      `password`,
+      create_time,
+      update_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{dbType,jdbcType=VARCHAR},
+      #{host,jdbcType=INTEGER},
+      #{port,jdbcType=VARCHAR},
+      #{dbName,jdbcType=VARCHAR},
+      #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      db_type = #{dbType,jdbcType=VARCHAR},
+      `host` = #{host,jdbcType=INTEGER},
+      port = #{port,jdbcType=VARCHAR},
+      db_name = #{dbName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.ipanel.partymember.pojo.SysDb" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_db
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dbType != null">
+        db_type,
+      </if>
+      <if test="host != null">
+        `host`,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="dbName != null">
+        db_name,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dbType != null">
+        #{dbType,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=INTEGER},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dbType != null">
+        db_type = #{dbType,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        `host` = #{host,jdbcType=INTEGER},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        db_name = #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

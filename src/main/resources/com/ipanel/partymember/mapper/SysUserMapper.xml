@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ipanel.partymember.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.ipanel.partymember.pojo.SysUser">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="lock_flag" jdbcType="CHAR" property="lockFlag" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    user_id, username, `password`, dept_id, job_id, email, phone, avatar, create_time, 
+    update_time, lock_flag, del_flag
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    update sys_user
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="username = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.username,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`password` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.password,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="dept_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.deptId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="job_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.jobId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="email = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.email,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="phone = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.phone,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="avatar = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.avatar,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="lock_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.lockFlag,jdbcType=CHAR}
+        </foreach>
+      </trim>
+      <trim prefix="del_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when user_id = #{item.userId,jdbcType=INTEGER} then #{item.delFlag,jdbcType=CHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where user_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.userId,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="user_id" keyProperty="userId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_user
+    (username, `password`, dept_id, job_id, email, phone, avatar, create_time, update_time, 
+      lock_flag, del_flag)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.deptId,jdbcType=INTEGER}, 
+        #{item.jobId,jdbcType=INTEGER}, #{item.email,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, 
+        #{item.avatar,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.lockFlag,jdbcType=CHAR}, #{item.delFlag,jdbcType=CHAR})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="user_id" keyProperty="userId" parameterType="com.ipanel.partymember.pojo.SysUser" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      username,
+      `password`,
+      dept_id,
+      job_id,
+      email,
+      phone,
+      avatar,
+      create_time,
+      update_time,
+      lock_flag,
+      del_flag,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR},
+      #{deptId,jdbcType=INTEGER},
+      #{jobId,jdbcType=INTEGER},
+      #{email,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR},
+      #{avatar,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{lockFlag,jdbcType=CHAR},
+      #{delFlag,jdbcType=CHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      lock_flag = #{lockFlag,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.ipanel.partymember.pojo.SysUser" useGeneratedKeys="true">
+    <!--@mbg.generated generated on Tue Nov 05 14:31:41 CST 2019.-->
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="lockFlag != null">
+        lock_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockFlag != null">
+        #{lockFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockFlag != null">
+        lock_flag = #{lockFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
